@@ -1,5 +1,5 @@
 CXX = g++ # Compiler
-CXXFLAGS = -Wall #Flags
+CXXFLAGS = -Wall # Flags
 
 # Directories
 BIN_DIR = ./bin
@@ -13,9 +13,11 @@ SRCS = $(wildcard $(SRC_DIR)/*.cpp) # Searches for all the .cpp files in (SRC_DI
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS)) # Takes the text from (SRCS) and substitues the .cpp pattern with the .o pattern.
 INCLUDES = $(wildcard $(INCLUDE_DIR)/*.h) # Searches for all the .h files in (INCLUDE_DIR) and lists them.
 
-TARGET = $(BIN_DIR)/tp1 #Executable name.
+TARGET = $(BIN_DIR)/tp1 # Executable name.
 
 # Rules
+all : main
+
 main : $(TARGET)
 
 $(TARGET) : $(OBJS)
@@ -27,21 +29,11 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(INCLUDES)
 clean:
 	rm $(OBJS) $(TARGET)
 
-valgrind1:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt $(TARGET) -c os_lusiadas.txt -o output.z78
-
-valgrind2:
+valgrind :
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt $(TARGET) -c input.txt -o output.z78
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt $(TARGET) -x output.z78 -o output.txt
 
-compress1 :
-	$(TARGET) -c os_lusiadas.txt -o output.z78
-
-compress2 :
-	$(TARGET) -c constituicao1988.txt -o output.z78
-
-compress3 :
-	$(TARGET) -c dom_casmurro.txt -o output.z78
-
-decompress :
+run :
+	$(TARGET) -c input.txt -o output.z78
 	$(TARGET) -x output.z78 -o output.txt
 ##
