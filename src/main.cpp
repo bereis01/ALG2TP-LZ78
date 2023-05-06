@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
             outputFile = fopen(outputFileName.c_str(), "wb");
         }
 
-        // Compresses the input file onto de outputfile.
+        // Compresses the input file onto the output file.
         compress(inputFile, outputFile);
 
         // Closes used files.
@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
             outputFile.open(outputFileName, std::ios::out);
         }
 
-        // Decompresses the input file onto de outputfile.
+        // Decompresses the input file onto the output file.
         decompress(inputFile, outputFile);
 
         // Closes used files.
