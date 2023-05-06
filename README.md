@@ -1,10 +1,6 @@
-# ALG2TP-LZ78
-# ALG2TP-LZ78
-# ALG2TP-LZ78
-
 # Trabalho Prático 01
 ## DCC207 Algoritmos 2
-## Universidade Federal de Minas Gerais 2023/01
+Universidade Federal de Minas Gerais 2023/01
 ### Bernardo Reis de Almeida
 
 # Introdução
