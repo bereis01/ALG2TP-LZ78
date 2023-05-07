@@ -29,8 +29,10 @@ $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(INCLUDES)
 clean:
 	rm $(OBJS) $(TARGET)
 
-valgrind :
+valgrind1 :
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt $(TARGET) -c input.txt -o output.z78
+
+valgrind2 :
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt $(TARGET) -x output.z78 -o output.txt
 
 run :
