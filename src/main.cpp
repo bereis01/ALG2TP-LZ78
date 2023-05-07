@@ -32,8 +32,8 @@ void compress(std::fstream &inputFile, FILE *outputFile)
 
     // Based on the maximum amount of codes, set the length in bits of the integer.
     float codeLimit = tree->getUniversalCode();
-    int bitAmount = ceil(log2(codeLimit) / 8);
-    fwrite(&bitAmount, sizeof(int), 1, outputFile);
+    long long int bitAmount = ceil(log2(codeLimit) / 8);
+    fwrite(&bitAmount, 4, 1, outputFile);
 
     // Deallocates all the allocated elements.
     delete tree;
@@ -90,8 +90,8 @@ void decompress(FILE *inputFile, std::fstream &outputFile)
     // CompactTrie *tree = new CompactTrie;
 
     // Collects the amount of bits used to compress the file.
-    int bitAmount = 0;
-    fread(&bitAmount, sizeof(int), 1, inputFile);
+    long long int bitAmount = 0;
+    fread(&bitAmount, 4, 1, inputFile);
 
     // Declares the auxiliary data structure.
     std::map<int, std::string> auxTable;
