@@ -14,6 +14,7 @@ private:
     std::string prefix;
     std::map<char, Node *> *childs;
     int code;
+    std::string codeStr;
 
     // Friend classes.
     friend class CompactTrie;
@@ -29,6 +30,10 @@ public:
     // Inserts a new word into the tree.
     void insert(std::string word);
 
+    // Inserts a new word into the tree.
+    // Decompression specifics.
+    void insertDec(std::string word, std::string wordCode);
+
     // Searches for a pattern within the tree.
     bool search(std::string word);
 
@@ -36,8 +41,10 @@ public:
     // ...Assumes that the pattern is in the tree.
     int getCode(std::string word);
 
-    // Prints the nodes in no specific order.
-    void print();
+    // Searches for the code of a pattern within the tree.
+    // ...Assumes that the pattern is in the tree.
+    // Decompression specifics.
+    std::string getCodeDec(std::string word);
 
     // Returns the attribute universalCode.
     // ...A matter of encapsulating.
@@ -50,8 +57,9 @@ private:
 
     // Auxiliary functions.
     void insertAux(Node *_root, std::string word);
+    void insertAuxDec(Node *_root, std::string word, std::string wordCode);
     bool searchAux(Node *_root, std::string word);
     int getCodeAux(Node *_root, std::string word);
+    std::string getCodeAuxDec(Node *_root, std::string word);
     void destructorAux(Node *_root);
-    void printAux(Node *_root);
 };

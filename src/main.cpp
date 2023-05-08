@@ -87,21 +87,18 @@ void compress(std::fstream &inputFile, FILE *outputFile)
 void decompress(FILE *inputFile, std::fstream &outputFile)
 {
     // Declares the tree to be used as auxiliary data structure.
-    // CompactTrie *tree = new CompactTrie;
+    CompactTrie *tree = new CompactTrie;
 
     // Collects the amount of bits used to compress the file.
     long long int bitAmount = 0;
     fread(&bitAmount, 4, 1, inputFile);
 
-    // Declares the auxiliary data structure.
-    std::map<int, std::string> auxTable;
-    auxTable[0] = "";
-    int globalCode = 1;
-
     // Reads the (code + character) and reconstructs the text.
     char inputChar;
     int code = 0;
+    int globalCode = 1;
     std::string holdStr = "";
+    tree->insertDec("0", "");
     while (true)
     {
         fread(&code, bitAmount, 1, inputFile);
@@ -113,13 +110,15 @@ void decompress(FILE *inputFile, std::fstream &outputFile)
             break;
         }
 
-        outputFile << std::noskipws << auxTable[code] << inputChar;
-        auxTable[globalCode] = auxTable[code] + inputChar;
+        holdStr = tree->getCodeDec(std::to_string(code));
+        outputFile << std::noskipws << holdStr;
+        outputFile << std::noskipws << inputChar;
+        tree->insertDec(std::to_string(globalCode), holdStr + inputChar);
         globalCode++;
     }
 
     // Deallocates all the allocated elements.
-    // delete tree;
+    delete tree;
 }
 
 int main(int argc, char *argv[])
